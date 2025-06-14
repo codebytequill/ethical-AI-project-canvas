@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethical AI Project Canvas</title>
+    <style>
+        /* --- Basic Setup & Typography --- */
+        :root {
+            --primary-color: #0a2b4c; /* Deep Blue */
+            --secondary-color: #4f7cac; /* Lighter Blue */
+            --accent-color: #2ecc71;   /* Green for positive/low-risk */
+            --warning-color: #f39c12;   /* Yellow for medium-risk */
+            --danger-color: #e74c3c;    /* Red for high-risk */
+            --light-gray: #f4f7f6;
+            --dark-gray: #34495e;
+            --text-color: #2c3e50;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* --- Layout & Structure --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--primary-color);
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        header p {
+            color: var(--secondary-color);
+            font-size: 1.1em;
+            margin-top: 5px;
+        }
+        
+        /* --- Form & Question Styling --- */
+        .canvas-section {
+            margin-bottom: 40px;
+            border-left: 4px solid var(--secondary-color);
+            padding-left: 20px;
+        }
+
+        .canvas-section h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .question-block {
+            margin-bottom: 25px;
+        }
+
+        .question-block p {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .options label {
+            display: inline-block;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+        
+        /* --- Explanations (Details/Summary) Styling --- */
+        details {
+            font-size: 0.9em;
+            color: var(--dark-gray);
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        summary {
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--secondary-color);
+        }
+
+        /* --- Button & Report Styling --- */
+        .submit-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #fff;
+            background-color: var(--accent-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #27ae60;
+        }
+
+        #report-output {
+            margin-top: 40px;
+            padding: 20px;
+            border-radius: 5px;
+            display: none; /* Hidden by default */
+        }
+
+        #report-output h2 {
+            margin-top: 0;
+        }
+        
+        .risk-low { background-color: #eafaf1; border: 1px solid var(--accent-color); }
+        .risk-medium { background-color: #fef5e7; border: 1px solid var(--warning-color); }
+        .risk-high { background-color: #fdedec; border: 1px solid var(--danger-color); }
+        
+        #report-output ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        #report-output li {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        #report-output li::before {
+            content: '⚠️ ';
+            margin-right: 8px;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Ethical AI Project Canvas</h1>
+            <p>A guided tool to assess the ethical considerations of an AI project.</p>
+        </header>
+
+        <main>
+            <form id="ethical-canvas-form">
+
+                <section class="canvas-section">
+                    <h2>1. Problem & Impact</h2>
+                    <div class="question-block">
+                        <p>Is the problem you're solving a real, validated user need?</p>
+                        <div class="options">
+                            <label><input type="radio" name="q1" value="0" required> Yes</label>
+                            <label><input type="radio" name="q1" value="1"> Partially/Unsure</label>
+                            <label><input type="radio" name="q1" value="2"> No</label>
+                        </div>
+                        <details>
+                            <summary>Why this matters</summary>
+                            <p>Ethical AI starts with solving real problems, not creating solutions in search of one. Unvalidated problems can lead to useless or even harmful products.</p>
+                        </details>
+                    </div>
+                    <div class="question-block">
+                        <p>Have you considered the potential for negative dual-use or unintended consequences?</p>
+                        <div class="options">
+                            <label><input type="radio" name="q2" value="0" required> Yes</label>
+                            <label><input type="radio" name="q2" value="1"> Partially/Unsure</label>
+                            <label><input type="radio" name="q2" value="2"> No</label>
+                        </div>
+                        <details>
+                            <summary>Why this matters</summary>
+                            <p>A technology designed for good can often be repurposed for harm. Considering these "dual-use" scenarios early is a critical part of responsible innovation.</p>
+                        </details>
+                    </div>
+                </section>
+
+                <section class="canvas-section">
+                    <h2>2. Data Collection & Privacy</h2>
+                    <div class="question-block">
+                        <p>Is your training data representative of your user population to avoid bias?</p>
+                        <div class="options">
+                            <label><input type="radio" name="q3" value="0" required> Yes</label>
+                            <label><input type="radio" name="q3" value="1"> Partially/Unsure</label>
+                            <label><input type="radio" name="q3" value="2"> No</label>
+                        </div>
+                         <details>
+                            <summary>Why this matters</summary>
+                            <p>If your data doesn't reflect the diversity of your users, your model will likely underperform for and discriminate against underrepresented groups.</p>
+                        </details>
+                    </div>
+                     <div class="question-block">
+                        <p>Is all personally identifiable information (PII) handled securely and with user consent?</p>
+                        <div class="options">
+                            <label><input type="radio" name="q4" value="0" required> Yes</label>
+                            <label><input type="radio" name="q4" value="1"> Partially/Unsure</label>
+                            <label><input type="radio" name="q4" value="2"> No</label>
+                        </div>
+                         <details>
+                            <summary>Why this matters</summary>
+                            <p>Data privacy is a fundamental user right. Mishandling PII can lead to severe legal, financial, and reputational damage, and harms your users directly.</p>
+                        </details>
+                    </div>
+                </section>
+
+                <section class="canvas-section">
+                    <h2>3. Model Fairness & Transparency</h2>
+                    <div class="question-block">
+                        <p>Do you have a clear plan to test for and mitigate algorithmic bias?</p>
+                         <div class="options">
+                            <label><input type="radio" name="q5" value="0" required> Yes</label>
+                            <label><input type="radio" name="q5" value="1"> Partially/Unsure</label>
+                            <label><input type="radio" name="q5" value="2"> No</label>
+                        </div>
+                         <details>
+                            <summary>Why this matters</summary>
+                            <p>Fairness doesn't happen by accident. It requires deliberate testing (e.g., slicing data by demographic groups) and mitigation strategies to ensure equitable outcomes.</p>
+                        </details>
+                    </div>
+                    <div class="question-block">
+                        <p>Can you explain the model's decisions to a non-technical user?</p>
+                         <div class="options">
+                            <label><input type="radio"name="q6" value="0" required> Yes</label>
+                            <label><input type="radio" name="q6" value="1"> Partially/Unsure</label>
+                            <label><input type="radio" name="q6" value="2"> No</label>
+                        </div>
+                        <details>
+                            <summary>Why this matters</summary>
+                            <p>Explainability builds trust. If users (or internal teams) don't understand why an AI makes a certain decision, they can't trust it, debug it, or appeal it.</p>
+                        </details>
+                    </div>
+                </section>
+
+                <button type="submit" class="submit-button">Generate Risk Summary</button>
+            </form>
+
+            <div id="report-output"></div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('ethical-canvas-form');
+            const reportOutput = document.getElementById('report-output');
+
+            form.addEventListener('submit', (event) => {
+                event.preventDefault(); // Prevent the form from submitting the traditional way
+
+                let totalScore = 0;
+                const feedbackItems = [];
+                const questionMap = {
+                    'q1': "Validate the user problem before proceeding.",
+                    'q2': "Perform a risk assessment for unintended consequences.",
+                    'q3': "Develop a data diversity plan to avoid representation bias.",
+                    'q4': "Audit your data handling processes for privacy and security.",
+                    'q5': "Establish a clear process for algorithmic bias testing.",
+                    'q6': "Invest in explainability methods to build user trust."
+                };
+
+                const formData = new FormData(form);
+
+                for (const [name, value] of formData.entries()) {
+                    const score = parseInt(value, 10);
+                    totalScore += score;
+                    if (score > 0) { // If answer is "Partially/Unsure" or "No"
+                        feedbackItems.push(questionMap[name]);
+                    }
+                }
+                
+                generateReport(totalScore, feedbackItems);
+            });
+
+            function generateReport(score, feedback) {
+                let reportHTML = '';
+                let overallRisk = '';
+                let riskClass = '';
+
+                // Determine overall risk level
+                if (score <= 3) {
+                    overallRisk = 'Low Risk';
+                    riskClass = 'risk-low';
+                } else if (score <= 7) {
+                    overallRisk = 'Medium Risk';
+                    riskClass = 'risk-medium';
+                } else {
+                    overallRisk = 'High Risk';
+                    riskClass = 'risk-high';
+                }
+
+                reportHTML += `<h2>Risk Summary: <span style="color:var(--${riskClass.replace('risk-','')}-color);">${overallRisk}</span></h2>`;
+                
+                if (feedback.length > 0) {
+                    reportHTML += '<p>The following areas require immediate attention:</p>';
+                    reportHTML += '<ul>';
+                    feedback.forEach(item => {
+                        reportHTML += `<li>${item}</li>`;
+                    });
+                    reportHTML += '</ul>';
+                } else {
+                    reportHTML += '<p>Excellent! Your project appears to have a strong ethical foundation based on these answers. Continue with rigorous diligence.</p>';
+                }
+
+                reportOutput.innerHTML = reportHTML;
+                reportOutput.className = riskClass; // Apply the class for styling
+                reportOutput.style.display = 'block'; // Make the report visible
+
+                // Scroll to the report
+                reportOutput.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    </script>
+
+</body>
+</html>
